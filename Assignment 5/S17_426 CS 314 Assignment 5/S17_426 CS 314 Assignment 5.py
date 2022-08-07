@@ -26,16 +26,19 @@ mask=cv2.inRange(thresh,(0,0,255),(0,255,255))
 result=cv2.bitwise_and(eq_img,eq_img,mask=mask)
 
 plt.subplot(1,3,1)
+plt.title('Original')
 plt.imshow(img)
 plt.xticks([])
 plt.yticks([])
 
 plt.subplot(1,3,2)
+plt.title('Mask')
 plt.imshow(mask,cmap='Greys_r')
 plt.xticks([])
 plt.yticks([])
 
 plt.subplot(1,3,3)
+plt.title('Result')
 plt.imshow(result)
 plt.xticks([])
 plt.yticks([])
@@ -67,9 +70,11 @@ clahe4=cv2.createCLAHE(clipLimit=20.0, tileGridSize=(8,8))
 gray_img_clahe_4=clahe4.apply(img)
 
 array=[gray_img_clahe_1,gray_img_clahe_2,gray_img_clahe_3,gray_img_clahe_4]
+title=['clipLimit = 2.0', 'clipLimit = 5.0', 'clipLimit = 10.0', 'clipLimit = 20.0']
 
 for i in range(0,4):
     plt.subplot(2,2,i+1)
+    plt.title(title[i])
     plt.imshow(array[i], cmap='Greys_r')
     plt.xticks([])
     plt.yticks([])
