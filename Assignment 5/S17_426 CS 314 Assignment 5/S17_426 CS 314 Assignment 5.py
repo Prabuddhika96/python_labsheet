@@ -48,34 +48,39 @@ plt.show()
 
 
 ## q2)
-img=cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE)
+img=cv2.imread('1.jpg',cv2.IMREAD_COLOR)
+img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 
-#global
-hist_eq_img=cv2.equalizeHist(img)
+#split & applying CLAHE
+def apply_clahe(img,limit):
+    h,s,v=cv2.split(cv2.cvtColor(img,cv2.COLOR_RGB2HSV))
+    clahe=cv2.createCLAHE(clipLimit=limit, tileGridSize=(8,8))
+    new_v=clahe.apply(v)
+
+    result=cv2.merge([h,s,new_v])
+    result=cv2.cvtColor(result,cv2.COLOR_HSV2RGB)
+
+    return result
 
 #creating a CLAHE object with clipLimit 2.0
-clahe1=cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-gray_img_clahe_1=clahe1.apply(img)
+gray_img_clahe_1=apply_clahe(img,2.0)
 
 #creating a CLAHE object with clipLimit 5.0
-clahe2=cv2.createCLAHE(clipLimit=5.0, tileGridSize=(8,8))
-gray_img_clahe_2=clahe2.apply(img)
+gray_img_clahe_2=apply_clahe(img,5.0)
 
 #creating a CLAHE object with clipLimit 10.0
-clahe3=cv2.createCLAHE(clipLimit=10.0, tileGridSize=(8,8))
-gray_img_clahe_3=clahe3.apply(img)
+gray_img_clahe_3=apply_clahe(img,10.0)
 
 #creating a CLAHE object with clipLimit 20.0
-clahe4=cv2.createCLAHE(clipLimit=20.0, tileGridSize=(8,8))
-gray_img_clahe_4=clahe4.apply(img)
+gray_img_clahe_4=apply_clahe(img,20.0)
 
-array=[gray_img_clahe_1,gray_img_clahe_2,gray_img_clahe_3,gray_img_clahe_4]
-title=['clipLimit = 2.0', 'clipLimit = 5.0', 'clipLimit = 10.0', 'clipLimit = 20.0']
+array=[img,gray_img_clahe_1,gray_img_clahe_2,gray_img_clahe_3,gray_img_clahe_4]
+title=['Original','clipLimit = 2.0', 'clipLimit = 5.0', 'clipLimit = 10.0', 'clipLimit = 20.0']
 
-for i in range(0,4):
-    plt.subplot(2,2,i+1)
+for i in range(0,5):
+    plt.subplot(3,2,i+1)
     plt.title(title[i])
-    plt.imshow(array[i], cmap='Greys_r')
+    plt.imshow(array[i])
     plt.xticks([])
     plt.yticks([])
 
