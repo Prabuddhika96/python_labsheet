@@ -77,6 +77,7 @@ img_clahe_20=apply_clahe(img,20.0)
 array=[img,img_clahe_2,img_clahe_5,img_clahe_10,img_clahe_20]
 title=['Original','clipLimit = 2.0', 'clipLimit = 5.0', 'clipLimit = 10.0', 'clipLimit = 20.0']
 
+#print plots
 for i in range(0,5):
     plt.subplot(2,3,i+1)
     plt.title(title[i])
