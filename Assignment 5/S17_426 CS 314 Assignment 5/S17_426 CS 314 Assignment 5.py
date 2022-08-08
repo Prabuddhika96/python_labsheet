@@ -63,22 +63,22 @@ def apply_clahe(img,limit):
     return result
 
 #creating a CLAHE object with clipLimit 2.0
-gray_img_clahe_1=apply_clahe(img,2.0)
+img_clahe_2=apply_clahe(img,2.0)
 
 #creating a CLAHE object with clipLimit 5.0
-gray_img_clahe_2=apply_clahe(img,5.0)
+img_clahe_5=apply_clahe(img,5.0)
 
 #creating a CLAHE object with clipLimit 10.0
-gray_img_clahe_3=apply_clahe(img,10.0)
+img_clahe_10=apply_clahe(img,10.0)
 
 #creating a CLAHE object with clipLimit 20.0
-gray_img_clahe_4=apply_clahe(img,20.0)
+img_clahe_20=apply_clahe(img,20.0)
 
-array=[img,gray_img_clahe_1,gray_img_clahe_2,gray_img_clahe_3,gray_img_clahe_4]
+array=[img,img_clahe_2,img_clahe_5,img_clahe_10,img_clahe_20]
 title=['Original','clipLimit = 2.0', 'clipLimit = 5.0', 'clipLimit = 10.0', 'clipLimit = 20.0']
 
 for i in range(0,5):
-    plt.subplot(3,2,i+1)
+    plt.subplot(2,3,i+1)
     plt.title(title[i])
     plt.imshow(array[i])
     plt.xticks([])
